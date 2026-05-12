@@ -1,3 +1,14 @@
+:root {
+    /* Replace your old typography rules with this updated setup */
+    --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-display: 'Frijole', cursive;
+}
+
+/* If you want that stylistic header font for your main logo title */
+.site-title, .site-title-page {
+    font-family: var(--font-display);
+}
+
 /* ============================== */
 /*       CSS RESET & BASE         */
 /* ============================== */
@@ -9,7 +20,7 @@
 }
 
 :root {
-    /* Atlassian-inspired color palette (but our own twist) */
+    /* Atlassian-inspired color palette */
     --primary-blue: #0052CC;
     --primary-blue-hover: #0065FF;
     --dark-blue: #172B4D;
@@ -21,7 +32,7 @@
     --medium-yellow: #FFAB00;
     --low-green: #36B37E;
     
-    /* Neutrals (Atlassian Design System colors) */
+    /* Neutrals */
     --neutral-900: #091E42;
     --neutral-800: #172B4D;
     --neutral-700: #253858;
@@ -54,7 +65,7 @@
     --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     --font-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
     
-    /* Shadows (Atlassian elevation system) */
+    /* Shadows */
     --shadow-1: 0 1px 1px rgba(9, 30, 66, 0.25), 0 0 1px rgba(9, 30, 66, 0.31);
     --shadow-2: 0 3px 5px rgba(9, 30, 66, 0.2), 0 0 1px rgba(9, 30, 66, 0.31);
     --shadow-3: 0 8px 12px rgba(9, 30, 66, 0.15), 0 0 1px rgba(9, 30, 66, 0.31);
@@ -80,7 +91,6 @@ body {
     flex-direction: column;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: red;
 }
 
 /* ============================== */
@@ -178,7 +188,7 @@ header {
     text-decoration: none;
 }
 
-/* Logo */
+/* Logo Image */
 .logo-img {
     width: 40px;
     height: 40px;
@@ -189,7 +199,7 @@ header {
     transform: rotate(360deg);
 }
 
-/* Navigation */
+/* Navigation Menu */
 nav ul {
     list-style: none;
     display: flex;
@@ -234,19 +244,14 @@ main {
     width: 100%;
 }
 
-main.sightings {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
+main.sightings,
 main.form-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* Hero Section (Homepage) */
+/* Hero Section Homepage */
 .hero-title {
     text-align: center;
     font-weight: 700;
@@ -263,7 +268,7 @@ main.form-container {
     margin: 0 auto;
 }
 
-/* Page Title */
+/* Page Standard Headings */
 .page-title {
     font-size: clamp(1.75rem, 5vw, 2.5rem);
     text-align: center;
@@ -277,23 +282,17 @@ main.form-container {
 
 .cards-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 350px), 1fr));
     gap: var(--space-3);
     width: 100%;
     padding: 0;
-}
-
-@media (max-width: 768px) {
-    .cards-container {
-        grid-template-columns: 1fr;
-    }
 }
 
 /* ============================== */
 /*          BUG CARDS             */
 /* ============================== */
 
-.sighting-card {
+.bug-card {
     background: var(--neutral-0);
     border: 1px solid var(--neutral-40);
     border-radius: var(--radius-md);
@@ -305,13 +304,13 @@ main.form-container {
     gap: var(--space-2);
 }
 
-.sighting-card:hover {
+.bug-card:hover {
     box-shadow: var(--shadow-3);
     transform: translateY(-2px);
     border-color: var(--neutral-60);
 }
 
-.sighting-card h3 {
+.bug-card h3 {
     font-size: 1.125rem;
     font-weight: 600;
     color: var(--neutral-900);
@@ -329,25 +328,25 @@ main.form-container {
     display: inline-block;
 }
 
-.sighting-text-wrapper {
+.bug-text-wrapper {
     position: relative;
-    max-height: 6.5em; /* ~5 lines */
+    max-height: 6.5em;
     overflow: hidden;
     transition: max-height 0.4s ease;
 }
 
-.sighting-card.expanded .sighting-text-wrapper {
+.bug-card.expanded .bug-text-wrapper {
     max-height: 1000px;
 }
 
-.sighting-text {
+.bug-text {
     font-size: 0.95rem;
     line-height: 1.6;
     color: var(--neutral-700);
     white-space: pre-line;
 }
 
-.sighting-text-wrapper::after {
+.bug-text-wrapper::after {
     content: "";
     position: absolute;
     bottom: 0;
@@ -359,7 +358,7 @@ main.form-container {
     transition: opacity 0.2s ease;
 }
 
-.sighting-card.expanded .sighting-text-wrapper::after {
+.bug-card.expanded .bug-text-wrapper::after {
     opacity: 0;
 }
 
@@ -399,7 +398,7 @@ form {
     width: 100%;
     max-width: 800px;
     display: grid;
-    gap: var(--space-3);
+    gap: var(--space-2);
     grid-template-columns: 1fr;
 }
 
@@ -411,11 +410,10 @@ form {
 }
 
 label {
-    display: block;
     font-weight: 600;
     font-size: 0.95rem;
     color: var(--neutral-800);
-    margin-bottom: var(--space-1);
+    margin-top: var(--space-1);
 }
 
 input,
@@ -461,7 +459,7 @@ select {
     padding-right: var(--space-4);
 }
 
-/* Submit Button */
+/* Submit Action Elements */
 .submit-btn,
 button[type="submit"] {
     width: 100%;
@@ -475,7 +473,7 @@ button[type="submit"] {
     cursor: pointer;
     transition: all 0.2s ease;
     box-shadow: var(--shadow-2);
-    margin-top: var(--space-2);
+    margin-top: var(--space-3);
 }
 
 .submit-btn:hover,
@@ -496,7 +494,7 @@ button[type="submit"]:focus {
     outline-offset: 2px;
 }
 
-/* Form Message */
+/* Informative Form Feedbacks */
 .form-message {
     text-align: center;
     margin-top: var(--space-2);
@@ -507,170 +505,3 @@ button[type="submit"]:focus {
     color: var(--neutral-600);
 }
 
-/* ============================== */
-/*      LIVE NEWS CONTAINER       */
-/* ============================== */
-
-.live-container {
-    background: var(--neutral-0);
-    border: 2px solid var(--primary-blue);
-    border-radius: var(--radius-md);
-    padding: var(--space-4);
-    width: 100%;
-    max-width: 800px;
-    text-align: center;
-    box-shadow: var(--shadow-2);
-    min-height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.125rem;
-    color: var(--neutral-800);
-    animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%, 100% {
-        border-color: var(--primary-blue);
-    }
-    50% {
-        border-color: var(--lighter-blue);
-    }
-}
-
-/* ============================== */
-/*            FOOTER              */
-/* ============================== */
-
-footer {
-    background-color: var(--neutral-900);
-    color: var(--neutral-40);
-    padding: var(--space-4) var(--space-3);
-    text-align: center;
-    margin-top: auto;
-}
-
-footer p {
-    font-size: 0.9rem;
-    color: var(--neutral-40);
-    margin-bottom: var(--space-1);
-}
-
-footer a {
-    color: var(--lighter-blue);
-}
-
-footer a:hover {
-    color: var(--neutral-0);
-}
-
-/* ============================== */
-/*       RESPONSIVE DESIGN        */
-/* ============================== */
-
-@media (max-width: 768px) {
-    .top-header {
-        flex-direction: column;
-        gap: var(--space-2);
-    }
-    
-    nav ul {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-    .hero-title {
-        font-size: 1.75rem;
-    }
-    
-    .cards-container {
-        padding: 0 var(--space-2);
-    }
-    
-    form {
-        padding: var(--space-3);
-    }
-}
-
-/* ============================== */
-/*       UTILITY CLASSES          */
-/* ============================== */
-
-.text-center {
-    text-align: center;
-}
-
-.mt-1 { margin-top: var(--space-1); }
-.mt-2 { margin-top: var(--space-2); }
-.mt-3 { margin-top: var(--space-3); }
-.mt-4 { margin-top: var(--space-4); }
-
-.mb-1 { margin-bottom: var(--space-1); }
-.mb-2 { margin-bottom: var(--space-2); }
-.mb-3 { margin-bottom: var(--space-3); }
-.mb-4 { margin-bottom: var(--space-4); }
-
-/* ============================== */
-/*      ACCESSIBILITY              */
-/* ============================== */
-
-.visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-}
-
-/* Focus visible for keyboard navigation */
-*:focus-visible {
-    outline: 2px solid var(--primary-blue);
-    outline-offset: 2px;
-    border-radius: var(--radius-sm);
-}
-
-/* ============================== */
-/*      LOADING ANIMATIONS        */
-/* ============================== */
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.sighting-card {
-    animation: fadeIn 0.3s ease;
-}
-
-/* ============================== */
-/*       SEVERITY BADGES          */
-/* ============================== */
-
-.severity-critical {
-    color: var(--critical-red);
-    font-weight: 700;
-}
-
-.severity-high {
-    color: var(--high-orange);
-    font-weight: 700;
-}
-
-.severity-medium {
-    color: var(--medium-yellow);
-    font-weight: 700;
-}
-
-.severity-low {
-    color: var(--low-green);
-    font-weight: 700;
-}
