@@ -1,0 +1,52 @@
+[
+  {
+    "uuid": "a9f1c6e5-9383-4d12-b28d-734c9370f861",
+    "location": "Production - Checkout Flow",
+    "timeStamp": "7 Jan 2025 at 09:30",
+    "title": "Payment Button Unresponsive on Mobile Safari",
+    "severity": "critical",
+    "status": "open",
+    "assignedTo": "Backend Team",
+    "text": "Users on iOS Safari 17+ report the 'Complete Payment' button doesn't respond to taps. Tested on iPhone 14 Pro — button highlights but form doesn't submit. Console shows 'Uncaught TypeError: Cannot read property submit of null'. Workaround: users can complete checkout on desktop. Estimated revenue impact: $12K/day (15% of mobile transactions). Steps to reproduce: 1) Add item to cart 2) Proceed to checkout on iOS Safari 3) Tap 'Complete Payment' button. Expected: Form submits. Actual: Nothing happens."
+  },
+  {
+    "uuid": "47e3291a-6f67-4fc0-9d06-25fa4d1f3ae1",
+    "location": "Dashboard - Analytics Widget",
+    "timeStamp": "20 March 2024 at 11:30",
+    "title": "Chart Rendering Breaks When Dataset Exceeds 10K Points",
+    "severity": "medium",
+    "status": "in-progress",
+    "assignedTo": "Frontend Team",
+    "text": "The sales analytics chart crashes when trying to render datasets with more than 10,000 data points. Browser freezes for 30+ seconds, then throws 'Maximum call stack size exceeded' error. This affects enterprise clients analyzing annual sales data. Currently investigating whether this is a Chart.js limitation or our data processing logic. Temporary fix: added pagination to limit initial render to 5K points. Long-term solution needed before Q2 enterprise renewals."
+  },
+  {
+    "uuid": "b83cb7e0-df38-493b-b53d-2616175ea5f9",
+    "location": "API - User Authentication Endpoint",
+    "timeStamp": "7 Jan 2025 at 10:00",
+    "title": "Race Condition Causes Duplicate User Accounts",
+    "severity": "high",
+    "status": "open",
+    "assignedTo": "Backend Team",
+    "text": "When users rapidly click 'Sign Up' (double-click or impatient taps), our API creates duplicate accounts with the same email. Root cause: no database constraint on email uniqueness + no request debouncing on frontend. Discovered when customer support received 47 complaints about 'account already exists' errors. Fix requires: 1) Add unique constraint to emails table 2) Implement 500ms debounce on signup button 3) Add idempotency key to API requests. Priority: High — affects trial-to-paid conversion."
+  },
+  {
+    "uuid": "c92de8f1-4a58-4c21-a65f-3727286fb9c2",
+    "location": "Email Service - Notification Queue",
+    "timeStamp": "7 May 2025 at 09:26",
+    "title": "Welcome Emails Delayed by 6+ Hours",
+    "severity": "medium",
+    "status": "investigating",
+    "assignedTo": "DevOps Team",
+    "text": "New user welcome emails are taking 6-12 hours to send instead of the expected 1-2 minutes. Queue inspection shows 45,000 backlogged jobs. Possible causes: 1) Email service rate limit exceeded 2) Worker nodes not scaling properly 3) Recent deploy introduced N+1 query in email template rendering. Immediate action: manually flushed queue, scaled workers from 3 to 8. Monitoring for recurrence. Users affected: ~2,300 signups from this week. Reputational risk: users think confirmation emails are broken."
+  },
+  {
+    "uuid": "d13fg9h2-5b69-5d32-b76g-4838397gc0d3",
+    "location": "Mobile App - Image Upload",
+    "timeStamp": "8 May 2025 at 12:08",
+    "title": "Profile Photo Upload Fails on Android 14",
+    "severity": "high",
+    "status": "open",
+    "assignedTo": "Mobile Team",
+    "text": "Android 14 users cannot upload profile photos — app crashes with 'FileNotFound' exception. Works fine on Android 13 and below. Root cause: Android 14 changed scoped storage permissions. Our code still uses deprecated file:// URIs instead of content:// URIs. Fix requires updating file picker library to v3.2+ and migrating to MediaStore API. Workaround: users can upload via web app. Impact: 23% of Android users blocked from completing profile setup. Priority: High — affects onboarding completion rate."
+  }
+]

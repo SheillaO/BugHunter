@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="From the Other Side - recording paranormal sightings">
+    <link rel="stylesheet" href="/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Frijole&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>BugHunter - Report a Bug</title>
+</head>
+
+<body>
+    <header>
+        <div class="top-header">
+            <img class="logo-img" src="/images/candle-logo.png" alt="site logo">
+            <nav id="main-navigation">
+                <ul role="list">
+                    <li role="listitem"><a href="/">Home</a></li>
+                    <li role="listitem"><a href="/sightings.html">Read</a></li>
+                    <li role="listitem"><a href="/upload-sighting.html">Upload</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="site-header">
+            <a href="/" class="site-title-page">From the Other Side</a>
+        </div>
+    </header>
+    <main class="form-container" aria-labelledby="form-title">
+        <h1 class="form-title" id="form-title">Add Sighting</h1>
+       <form id="bugForm">
+  <label for="title">Bug Title:</label>
+  <input type="text" id="title" placeholder="Payment button unresponsive on iOS">
+
+  <label for="details">Bug Details:</label>
+  <textarea id="details" rows="5" placeholder="Steps to reproduce: 1) Navigate to checkout 2) Tap payment button 3) Nothing happens..."></textarea>
+
+  <label for="location">Location:</label>
+  <input type="text" id="location" placeholder="Production - Checkout Flow">
+
+  <label for="severity">Severity:</label>
+  <select id="severity" name="severity">
+    <option value="critical">🔴 Critical</option>
+    <option value="high">🟠 High</option>
+    <option value="medium">🟡 Medium</option>
+    <option value="low">🟢 Low</option>
+  </select>
+
+  <button type="submit">Submit Bug Report</button>
+</form>
+    </main>
+
+    <footer>
+        <p>&copy; From The Other Side. All rights reserved.</p>
+        <p><a href="/news.html">Check out our news feed!</a> (beta)</p>
+    </footer>
+    <script type="module" src="upload-sighting.js"></script>
+</body>
+
+</html>
