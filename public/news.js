@@ -1,17 +1,16 @@
-const eventSource = new EventSource("/api/news") 
+const eventSource = new EventSource("/api/news");
+const liveContainer = document.getElementById("live-container");
 
-const liveContainer = document.getElementById("live-container")
-
-
-// Handle live price updates 
+// Handle live debugging feed tickers incoming from backend engines
 eventSource.onmessage = (event) => {
-  const data = JSON.parse(event.data)
-  const story = data.story
-  liveContainer.textContent = story
-}
+  if (!liveContainer) return;
+  const data = JSON.parse(event.data);
+  // Extracted stream parameters updated to reflect platforms feeds cleanly
+  const feedUpdate = data.story || data.message || "New bug activity tracked.";
+  liveContainer.textContent = feedUpdate;
+};
 
-// Handle connection loss
+// Handle tracking network dropped links safely
 eventSource.onerror = () => {
-  console.log("Connection lost. Attempting to reconnect...")
-}
-
+  console.warn("Telemetry connection lost. Attempting auto-reconnection...");
+};
