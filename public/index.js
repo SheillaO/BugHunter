@@ -3,9 +3,9 @@ const API_BASE =
   window.location.hostname === "localhost" ||
   window.location.hostname === "127.0.0.1"
     ? "http://localhost:8000"
-    : "https://bughunter-7v7f.onrender.com";
+    : "onrender.com";
 
-// 2. Fetch data from the active environment endpoint
+// 2. Fetch bug listings from your live Render pipeline
 try {
   const data = await fetch(`${API_BASE}/api`);
   const response = await data.json();
@@ -34,7 +34,8 @@ function renderCards(cardsData) {
   </p>
   <h3 id="bug-title-${i}">${card.title}</h3>
   <div class="bug-text-wrapper">
-    <p class="bug-text">${card.details}</p>
+    <!-- CHANGED: Replaced card.details with card.text to align database properties -->
+    <p class="bug-text">${card.text || "No description provided."}</p>
   </div>
   <button class="read-more-btn" aria-expanded="false">Read in full</button>
 </article>
