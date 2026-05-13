@@ -1,64 +1,70 @@
-const form = document.getElementById("eventForm")
-const formMessageText = document.getElementsByClassName("form-message-text")[0]
+// Target the exact ID matching your BugHunter HTML form layout structure
+const form = document.getElementById("bugForm");
+const formMessageText = document.querySelector(".form-message");
 
-form.addEventListener("submit", async function (event) {
-  event.preventDefault()
+if (form) {
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-  const location = document.getElementById("location").value
-  const text = document.getElementById("details").value
-  const title = document.getElementById("title").value
+    const title = document.getElementById("title").value.trim();
+    const details = document.getElementById("details").value.trim();
+    const location = document.getElementById("location").value.trim();
+    const severity = document.getElementById("severity").value;
 
-  if (!location || !text || !title) {
-    formMessageText.textContent = `Please complete all fields!`
-    return
-  }
-
-  const isoDateString = document.getElementById("datetime").value
-
-  if (!isoDateString) {
-    formMessageText.textContent = "Please select a date and time!"
-    return
-  }
-  // Convert the string to a JavaScript Date object
-  const date = new Date(isoDateString)
-  // Format the date to a readable string
-  const options = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  }
-  const readableDate = date.toLocaleString("en-GB", options)
-
-  const formData = {
-    location: location,
-    timeStamp: readableDate,
-    text: text,
-    title: title,
-  }
-
-  try {
-    // Send form data using fetch API
-    formMessageText.textContent = ""
-    const response = await fetch("./api", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(formData),
-    })
-    if (response.ok) {
-      formMessageText.innerHTML = `Your sighting was uploaded. View it <a href="./sightings.html">here</a>.`;
-      form.reset()
-    } else {
-      formMessageText.textContent = `The server Ghosted you(!). Please try again.`
-      console.error("Server Error:", response.statusText)
+    if (!title || !details || !location) {
+      if (formMessageText)
+        formMessageText.textContent = "Please complete all mandatory fields!";
+      return;
     }
-  } catch (error) {
-    formMessageText.textContent = `Serious ghouls! Please try again.`
-    console.error("Error:", error)
-  }
-})
 
+    // Generate accurate, live timestamps directly on submission
+    const date = new Date();
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    };
+    const readableDate = date.toLocaleString("en-GB", options);
+
+    // Consolidated payload schema mapping accurately to index.js layout template properties
+    const formData = {
+      title: title,
+      details: details,
+      location: location,
+      severity: severity,
+      timeStamp: readableDate,
+    };
+
+    try {
+      if (formMessageText) formMessageText.textContent = "Uploading ticket...";
+
+      const response = await fetch("/api", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        if (formMessageText) {
+          formMessageText.innerHTML = `Your bug report was logged. View it <a href="/bugs.html">here</a>.`;
+        }
+        form.reset();
+      } else {
+        if (formMessageText)
+          formMessageText.textContent =
+            "The server rejected the log request. Please retry.";
+        console.error("Server Error:", response.statusText);
+      }
+    } catch (error) {
+      if (formMessageText)
+        formMessageText.textContent =
+          "Network error. Unable to contact log engine.";
+      console.error("Log Connection Failure:", error);
+    }
+  });
+}
