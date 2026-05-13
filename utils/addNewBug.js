@@ -1,24 +1,20 @@
-import path from 'node:path'
-import fs from 'node:fs/promises'
-import { getData } from './getData.js'
+import path from "node:path";
+import fs from "node:fs/promises";
+import { fileURLToPath } from "node:url";
+import { getData } from "./getData.js";
 
-export async function addNewSighting(newSighting) {
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-  try { 
+export async function addNewBug(newBug) {
+  try {
+    const bugs = await getData();
+    bugs.push(newBug);
 
-    const sightings = await getData()
-    sightings.push(newSighting)
     
-    const pathJSON = path.join('data', 'data.json')
-    
-    await fs.writeFile(
-      pathJSON,
-      JSON.stringify(sightings, null, 2),
-      'utf8'
-    )
+    const pathJSON = path.join(__dirname, "..", "data", "bugs.json");
 
+    await fs.writeFile(pathJSON, JSON.stringify(bugs, null, 2), "utf8");
   } catch (err) {
-    throw new Error(err)
+    throw new Error(`Failed to save bug report: ${err.message}`);
   }
-
 }

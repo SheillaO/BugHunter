@@ -6,7 +6,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export async function getData() {
   try {
-    // Change 'data.json' to 'bugs.json'
+    
     const pathJSON = path.join(__dirname, "..", "data", "bugs.json");
     const data = await fs.readFile(pathJSON, "utf8");
     return JSON.parse(data);
