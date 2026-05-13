@@ -1,5 +1,6 @@
 import path from "node:path";
 import fs from "node:fs/promises";
+import crypto from "node:crypto"; // <-- Added this critical native import
 import { fileURLToPath } from "node:url";
 import { getData } from "./getData.js";
 
@@ -10,8 +11,8 @@ export async function addNewBug(newBug) {
   try {
     const bugs = await getData();
 
-    // Assign a unique identification token string directly on insertion
-    newBug.uuid = crypto.randomUUID ? crypto.randomUUID() : `bug-${Date.now()}`;
+    // Safely assign a unique tracking ID to the incoming bug report
+    newBug.uuid = crypto.randomUUID();
     bugs.push(newBug);
 
     await fs.writeFile(pathJSON, JSON.stringify(bugs, null, 2), "utf8");

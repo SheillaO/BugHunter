@@ -1,7 +1,10 @@
-// Define a listener function
+// Define a listener function tracking bug submission alerts
 export function createSlackAlert(bug) {
-  console.log(`🚨 ALERT: ${bug.severity.toUpperCase()} bug reported in ${bug.location}`)
-  console.log(`📋 Title: ${bug.title}`)
-  console.log(`👤 Assigned to: ${bug.assignedTo || 'Unassigned'}`)
-  
+  const severityStr = bug.severity ? bug.severity.toUpperCase() : "LOW";
+  const locationStr = bug.location || "Unknown Environment";
+  const titleStr = bug.title || "Untitled Report";
+
+  console.log(`🚨 ALERT: ${severityStr} bug reported in ${locationStr}`);
+  console.log(`📋 Title: ${titleStr}`);
+  console.log(`👤 Assigned to: ${bug.assignedTo || "Unassigned"}`);
 }
