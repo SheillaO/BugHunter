@@ -3,7 +3,7 @@ const API_BASE =
   window.location.hostname === "localhost" ||
   window.location.hostname === "127.0.0.1"
     ? "http://localhost:8000"
-    : "onrender.com";
+    : "https://bughunter-7v7f.onrender.com";
 
 // 2. Establish Server-Sent Events (SSE) telemetry connection loop
 const eventSource = new EventSource(`${API_BASE}/api/news`);

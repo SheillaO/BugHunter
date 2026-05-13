@@ -17,14 +17,10 @@ export async function handlePost(req, res) {
     const parsedBody = await parseJSONBody(req);
     const sanitizedBody = sanitizeInput(parsedBody);
 
-    // Set baseline defaults so your cards render nicely on the dashboard
     sanitizedBody.status = sanitizedBody.status || "open";
     sanitizedBody.assignedTo = sanitizedBody.assignedTo || "Unassigned";
 
-    // Save to bugs.json and pass back the saved item
     await addNewBug(sanitizedBody);
-
-    // Fire the event listener (Triggers your custom Slack log alerts)
     bugEvents.emit("bug-added", sanitizedBody);
 
     sendResponse(res, 201, "application/json", JSON.stringify(sanitizedBody));
@@ -44,19 +40,13 @@ export async function handleNews(req, res) {
   res.setHeader("Cache-Control", "no-cache");
   res.setHeader("Connection", "keep-alive");
 
-  // Push news objects down the stream pipe loop every 3 seconds
   const newsInterval = setInterval(() => {
     const randomIndex = Math.floor(Math.random() * devNews.length);
 
-    res.write(
-      `data: ${JSON.stringify({
-        event: "news-update",
-        story: devNews[randomIndex],
-      })}\n\n`,
-    );
+    // Direct flat object string mapping to match frontend properties cleanly
+    res.write(`data: ${JSON.stringify({ story: devNews[randomIndex] })}\n\n`);
   }, 3000);
 
-  // CRITICAL FIX: Destroys the timer when a client closes the connection tab to save memory
   req.on("close", () => {
     clearInterval(newsInterval);
     res.end();
