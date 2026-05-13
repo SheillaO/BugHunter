@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="BugHunter - Active Bug Reports">
-    <link rel="stylesheet" href="/index.css">
+<link rel="stylesheet" href="public/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Frijole&family=Poppins:wght@400;500;600;700&display=swap"
@@ -16,8 +16,7 @@
 <body>
     <header>
         <div class="top-header">
-            <img class="logo-img" src="/images/candle-logo.png" alt="site logo">
-            <nav id="main-navigation">
+            <img class="logo-img" src="public/images/candle-logo.png" alt="site logo">
                 <ul role="list">
                     <li role="listitem"><a href="/">Home</a></li>
                     <li role="listitem"><a href="/bugs.html">Bugs</a></li>
@@ -37,6 +36,15 @@
         <p><a href="/news.html">Check out our news feed!</a> (beta)</p>
     </footer>
     <script type="module" src="/index.js"></script>
+    
+    <!-- For news.html -->
+    <script type="module" src="news.js"></script>
+    
+    <!-- For report-bug.html -->
+    <script type="module" src="report-bug.js"></script>
+    
+    <!-- For report-bug.html -->
+    <script type="module" src="upload-bug.js"></script>
 </body>
 
 </html>
