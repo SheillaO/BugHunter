@@ -1,4 +1,11 @@
-// Target the exact ID matching your BugHunter HTML form layout structure
+// 1. Initialize environment routing base immediately
+const API_BASE =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1"
+    ? "http://localhost:8000"
+    : "onrender.com";
+
+// 2. Locate targeted DOM form nodes
 const form = document.getElementById("bugForm");
 const formMessageText = document.querySelector(".form-message");
 
@@ -12,8 +19,9 @@ if (form) {
     const severity = document.getElementById("severity").value;
 
     if (!title || !details || !location) {
-      if (formMessageText)
+      if (formMessageText) {
         formMessageText.textContent = "Please complete all mandatory fields!";
+      }
       return;
     }
 
@@ -41,7 +49,8 @@ if (form) {
     try {
       if (formMessageText) formMessageText.textContent = "Uploading ticket...";
 
-      const response = await fetch("/api", {
+      // 3. Dispatch payload cross-origin straight into Render
+      const response = await fetch(`${API_BASE}/api`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -51,26 +60,22 @@ if (form) {
 
       if (response.ok) {
         if (formMessageText) {
-          formMessageText.innerHTML = `Your bug report was logged. View it <a href="/bugs.html">here</a>.`;
+          formMessageText.innerHTML = `Your bug report was logged. View it <a href="bugs.html">here</a>.`;
         }
         form.reset();
       } else {
-        if (formMessageText)
+        if (formMessageText) {
           formMessageText.textContent =
             "The server rejected the log request. Please retry.";
+        }
         console.error("Server Error:", response.statusText);
       }
     } catch (error) {
-      if (formMessageText)
+      if (formMessageText) {
         formMessageText.textContent =
           "Network error. Unable to contact log engine.";
+      }
       console.error("Log Connection Failure:", error);
     }
   });
 }
-
-const API_BASE =
-  window.location.hostname === "localhost" ||
-  window.location.hostname === "127.0.0.1"
-    ? "http://localhost:8000"
-    : "https://bughunter-7v7f.onrender.com";
