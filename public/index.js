@@ -1,5 +1,13 @@
+// 1. Initialize environment routing base immediately
+const API_BASE =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1"
+    ? "http://localhost:8000"
+    : "https://bughunter-7v7f.onrender.com";
+
+// 2. Fetch data from the active environment endpoint
 try {
-  const data = await fetch("/api");
+  const data = await fetch(`${API_BASE}/api`);
   const response = await data.json();
   renderCards(response);
 } catch (err) {
@@ -13,7 +21,6 @@ function renderCards(cardsData) {
   let cardsHTML = "";
 
   cardsData.forEach((card, i) => {
-    // Dynamically choose status indicators based on severity ranking strings
     const severityClass = card.severity
       ? `severity-${card.severity.toLowerCase()}`
       : "severity-low";
@@ -37,7 +44,7 @@ function renderCards(cardsData) {
   container.innerHTML = cardsHTML;
 }
 
-// Global delegated event handling for cards expand/collapse mechanics
+// 3. Delegate show more / show less click mechanics safely
 document.querySelector(".cards-container")?.addEventListener("click", (e) => {
   if (!e.target.classList.contains("read-more-btn")) return;
 
