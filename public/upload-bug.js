@@ -40,7 +40,7 @@ if (form) {
     // Consolidated payload schema mapping accurately to index.js layout template properties
     const formData = {
       title: title,
-      details: details,
+      text: details, // <-- Change this property name key here
       location: location,
       severity: severity,
       timeStamp: readableDate,
