@@ -4,7 +4,8 @@
 
 <img width="1496" height="836" alt="Bug Hunt" src="https://github.com/user-attachments/assets/e0a15e93-da6f-470a-9576-6386d2dc24e7" />
 
-<br />
+
+---
 
 [![Live Demo](https://img.shields.io/badge/demo-live-success)](https://bugshunter.netlify.app/)
 
