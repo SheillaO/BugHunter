@@ -1,271 +1,353 @@
-/* ========================================== */
-/*  1. JIRA COGNITIVE DESIGN TOKENS & RESET    */
-/* ========================================== */
+/* ============================== */
+/*     RESET & VARIABLES          */
+/* ============================== */
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
-    /* Exact Atlassian Jira Structural Palette */
-    --ds-background-default: #FAFBFC;
-    --ds-background-surface: #FFFFFF;
-    --ds-background-input: #FAFBFC;
-    --ds-border: #DFE1E6;
-    --ds-border-focused: #0052CC;
-    
-    /* Jira Typographic Hierarchy Colors */
-    --ds-text: #172B4D;
-    --ds-text-subtle: #5E6C84;
-    --ds-link: #0052CC;
-    --ds-link-hover: #0065FF;
-    
-    /* Accurate Jira Severity Badges */
-    --badge-critical: #DE350B;
-    --badge-high: #FF8B00;
-    --badge-medium: #0052CC;
-    --badge-low: #00875A;
-
-    /* Interface System Attributes */
-    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    --radius: 3px; /* Jira Standard Card/Input Border Radius */
+  --blue: #0052CC;
+  --blue-light: #4C9AFF;
+  --red: #FF5630;
+  --orange: #FF8B00;
+  --yellow: #FFC400;
+  --green: #36B37E;
+  --gray-900: #172B4D;
+  --gray-700: #42526E;
+  --gray-300: #C1C7D0;
+  --gray-100: #F4F5F7;
+  --white: #FFFFFF;
+  --shadow: 0 1px 3px rgba(0,0,0,0.12);
+  --shadow-lg: 0 4px 12px rgba(0,0,0,0.15);
+  --radius: 6px;
 }
 
-/* ========================================== */
-/*  2. GLOBAL STRUCTURAL BASE STYLES          */
-/* ========================================== */
+/* ============================== */
+/*          BASE STYLES           */
+/* ============================== */
+
 body {
-    background-color: var(--ds-background-default);
-    color: var(--ds-text);
-    font-family: var(--font-sans);
-    font-size: 14px; /* Default Atlassian Body Font Size */
-    line-height: 1.42857143;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    -webkit-font-smoothing: antialiased;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--gray-900);
+  background: var(--gray-100);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-a {
-    color: var(--ds-link);
-    text-decoration: none;
-}
+h1, h2, h3 { font-weight: 600; line-height: 1.2; }
+a { color: var(--blue); text-decoration: none; transition: 0.2s; }
+a:hover { color: var(--blue-light); }
 
-a:hover {
-    color: var(--ds-link-hover);
-    text-decoration: underline;
-}
+/* ============================== */
+/*        HEADER & NAV            */
+/* ============================== */
 
-/* ========================================== */
-/*  3. JIRA COMPONENT HEADER & WRAPPERS       */
-/* ========================================== */
 header {
-    background-color: var(--ds-background-surface);
-    border-bottom: 1px solid var(--ds-border);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-300);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow);
 }
 
 .top-header {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0.5rem 1.5rem; /* Slim header padding profile */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.site-title, .site-title-page {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--ds-text);
+.logo-img {
+  width: 32px;
+  height: 32px;
 }
 
-/* Clean, Balanced Jira Top Navigation */
 nav ul {
-    list-style: none;
-    display: flex;
-    gap: 1rem;
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
 }
 
 nav a {
-    color: var(--ds-text-subtle);
-    font-weight: 500;
-    padding: 4px 8px;
-    border-radius: var(--radius);
+  color: var(--gray-700);
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  transition: 0.2s;
 }
 
-nav a:hover, nav a.current {
-    color: var(--ds-link);
-    background-color: #F4F5F7;
+nav a:hover {
+  background: var(--gray-100);
+  color: var(--gray-900);
 }
+
+.site-header {
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%);
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.site-title,
+.site-title-page {
+  color: var(--white);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+}
+
+/* ============================== */
+/*           MAIN & HERO          */
+/* ============================== */
 
 main {
-    flex: 1;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem 1.5rem;
-    width: 100%;
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  width: 100%;
 }
 
-footer {
-    text-align: center;
-    padding: 1.5rem;
-    border-top: 1px solid var(--ds-border);
-    color: var(--ds-text-subtle);
-    font-size: 12px;
-    background-color: var(--ds-background-surface);
+.hero-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
-/* ========================================== */
-/*  4. DYNAMIC SYSTEM BUG CARDS GRID          */
-/* ========================================== */
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--gray-700);
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* ============================== */
+/*          BUG CARDS             */
+/* ============================== */
+
 .cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 1rem;
-    width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
 }
 
 .bug-card {
-    background: var(--ds-background-surface);
-    border: 1px solid var(--ds-border);
-    border-radius: var(--radius);
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    box-shadow: 0 1px 1px rgba(9,30,66,0.25);
-    transition: background-color 0.1s ease;
+  background: var(--white);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: 0.2s;
 }
 
 .bug-card:hover {
-    background-color: #FAFBFC;
-}
-
-.bug-card h3 {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--ds-text);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
 }
 
 .card-details {
-    font-size: 12px;
-    color: var(--ds-text-subtle);
+  font-size: 0.875rem;
+  color: var(--gray-700);
+  margin-bottom: 0.75rem;
+}
+
+.bug-card h3 {
+  font-size: 1.125rem;
+  margin-bottom: 0.75rem;
 }
 
 .bug-text-wrapper {
-    position: relative;
-    max-height: 4.2em;
-    overflow: hidden;
+  max-height: 5rem;
+  overflow: hidden;
+  position: relative;
+  transition: max-height 0.3s ease;
 }
 
 .bug-card.expanded .bug-text-wrapper {
-    max-height: 1000px;
+  max-height: 1000px;
 }
 
 .bug-text {
-    font-size: 13px;
-    color: var(--ds-text);
-    white-space: pre-line;
+  font-size: 0.95rem;
+  color: var(--gray-700);
+  white-space: pre-line;
+}
+
+.bug-text-wrapper::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2rem;
+  background: linear-gradient(transparent, var(--white));
+  transition: opacity 0.2s;
+}
+
+.bug-card.expanded .bug-text-wrapper::after {
+  opacity: 0;
 }
 
 .read-more-btn {
-    align-self: flex-start;
-    background: none;
-    border: none;
-    color: var(--ds-link);
-    font-size: 12px;
-    font-weight: 500;
-    cursor: pointer;
-    padding-top: 0.25rem;
+  background: none;
+  border: none;
+  color: var(--blue);
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  margin-top: 0.5rem;
+  transition: 0.2s;
 }
 
 .read-more-btn:hover {
-    text-decoration: underline;
+  color: var(--blue-light);
 }
 
-/* ========================================== */
-/*  5. MINIMALIST JIRA INPUT FORMS            */
-/* ========================================== */
+/* Severity Colors */
+.severity-critical { color: var(--red); font-weight: 600; }
+.severity-high { color: var(--orange); font-weight: 600; }
+.severity-medium { color: var(--yellow); font-weight: 600; }
+.severity-low { color: var(--green); font-weight: 600; }
+
+/* ============================== */
+/*            FORMS               */
+/* ============================== */
+
 form {
-    background: var(--ds-background-surface);
-    border: 1px solid var(--ds-border);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    max-width: 600px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    box-shadow: 0 1px 1px rgba(9,30,66,0.25);
+  background: var(--white);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .form-title {
-    font-size: 20px;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
+  font-size: 2rem;
+  margin-bottom: 1rem;
 }
 
 label {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--ds-text-subtle);
-    margin-bottom: -0.5rem;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: 0.5rem;
+  display: block;
 }
 
-input, textarea, select {
-    background-color: var(--ds-background-input);
-    border: 1px solid var(--ds-border);
-    color: var(--ds-text);
-    border-radius: var(--radius);
-    padding: 6px 8px;
-    font-family: var(--font-sans);
-    font-size: 14px;
-    width: 100%;
-    outline: none;
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius);
+  font-family: inherit;
+  transition: 0.2s;
 }
 
-input:focus, textarea:focus, select:focus {
-    background-color: var(--ds-background-surface);
-    border-color: var(--ds-border-focused);
-    box-shadow: 0 0 0 1px var(--ds-border-focused);
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid var(--blue);
+  outline-offset: 0;
+  border-color: var(--blue);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 150px;
 }
 
 button[type="submit"] {
-    background-color: var(--ds-link);
-    color: var(--ds-background-surface);
-    border: none;
-    border-radius: var(--radius);
-    padding: 6px 12px;
-    font-weight: 500;
-    font-size: 14px;
-    cursor: pointer;
-    align-self: flex-start; /* Jira buttons align-left naturally */
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%);
+  color: var(--white);
+  border: none;
+  padding: 0.875rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: var(--shadow);
 }
 
 button[type="submit"]:hover {
-    background-color: var(--ds-link-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
 }
 
-/* Jira Live Monitor Widget Styling */
+.form-message {
+  text-align: center;
+  color: var(--gray-700);
+  font-size: 0.95rem;
+}
+
+/* ============================== */
+/*         LIVE FEED              */
+/* ============================== */
+
 .live-container {
-    background: #EAE6FF;
-    border-left: 3px solid #403294; /* Classic Atlassian banner highlight border */
-    border-radius: var(--radius);
-    padding: 1rem;
-    font-size: 14px;
-    color: #403294;
+  background: var(--white);
+  border: 2px solid var(--blue);
+  border-radius: var(--radius);
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.125rem;
+  box-shadow: var(--shadow);
+  animation: pulse 2s infinite;
 }
 
-/* Exact Typography Badge Weights */
-.severity-critical { color: var(--badge-critical); font-weight: 600; }
-.severity-high { color: var(--badge-high); font-weight: 600; }
-.severity-medium { color: var(--badge-medium); font-weight: 600; }
-.severity-low { color: var(--badge-low); font-weight: 600; }
+@keyframes pulse {
+  0%, 100% { border-color: var(--blue); }
+  50% { border-color: var(--blue-light); }
+}
 
-.mt-3 { margin-top: 1rem; }
-.form-message { font-size: 13px; color: var(--ds-text-subtle); text-align: left; }
+/* ============================== */
+/*           FOOTER               */
+/* ============================== */
+
+footer {
+  background: var(--gray-900);
+  color: var(--white);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  margin-top: auto;
+}
+
+footer p {
+  font-size: 0.9rem;
+  color: var(--gray-300);
+}
+
+footer a {
+  color: var(--blue-light);
+}
+
+/* ============================== */
+/*         RESPONSIVE             */
+/* ============================== */
+
+@media (max-width: 768px) {
+  .top-header { flex-direction: column; gap: 1rem; }
+  nav ul { gap: 0.75rem; }
+  .cards-container { grid-template-columns: 1fr; }
+}
 
