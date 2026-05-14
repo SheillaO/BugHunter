@@ -1,9 +1,9 @@
-// 1. Initialize environment routing base immediately with your specific Render subdomain
+// 1. Initialize environment routing base immediately with your full schema prefix
 const API_BASE =
   window.location.hostname === "localhost" ||
   window.location.hostname === "127.0.0.1"
     ? "http://localhost:8000"
-    : "https://bughunter-7v7f.onrender.com"; // <-- Fixed to your live Render server domain
+    : "https://bughunter-7v7f.onrender.com"; // <-- Ensure this is 100% identical to upload-bug.js
 
 // 2. Locate targeted DOM form nodes
 const form = document.getElementById("bugForm");
