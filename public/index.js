@@ -34,8 +34,8 @@ function renderCards(cardsData) {
   </p>
   <h3 id="bug-title-${i}">${card.title}</h3>
   <div class="bug-text-wrapper">
-    <!-- CHANGED: Replaced card.details with card.text to align database properties -->
-    <p class="bug-text">${card.text || "No description provided."}</p>
+    <!-- CHANGED: Swapped card.text to card.details to line up with backend logic -->
+    <p class="bug-text">${card.details || "No description provided."}</p>
   </div>
   <button class="read-more-btn" aria-expanded="false">Read in full</button>
 </article>
