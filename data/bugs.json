@@ -48,5 +48,55 @@
     "status": "open",
     "assignedTo": "Mobile Team",
     "details": "Android 14 users cannot upload profile photos — app crashes with 'FileNotFound' exception. Works fine on Android 13 and below. Root cause: Android 14 changed scoped storage permissions. Our code still uses deprecated file:// URIs instead of content:// URIs. Fix requires updating file picker library to v3.2+ and migrating to MediaStore API. Workaround: users can upload via web app. Impact: 23% of Android users blocked from completing profile setup. Priority: High — affects onboarding completion rate."
+  },
+  {
+    "uuid": "e24hj1k3-6c70-6e43-c88h-5949408hd1e4",
+    "location": "Billing - Stripe Webhook Handler",
+    "timeStamp": "12 May 2026 at 14:15",
+    "title": "Subscription Status Fails to Update on Renewal",
+    "severity": "critical",
+    "status": "open",
+    "assignedTo": "Backend Team",
+    "details": "Successful Stripe renewal events are failing to update user profiles to 'active'. Server logs show a '422 Unprocessable Entity' error due to a recent database migration that made the 'trial_ended_at' column mandatory without a default value. Impact: Paying users are being locked out of their accounts automatically after day 30. Workaround: Customer support must manually toggle accounts in the admin console. Priority: Critical — blocking active revenue generation streams."
+  },
+  {
+    "uuid": "f35jk2l4-7d81-7f54-d99i-6050519ie2f5",
+    "location": "Frontend - Global Search Bar",
+    "timeStamp": "13 May 2026 at 08:45",
+    "title": "Keyboard Navigation Traps Focus inside Search Dropdown",
+    "severity": "medium",
+    "status": "in-progress",
+    "assignedTo": "Accessibility Team",
+    "details": "Keyboard-only users cannot exit the search suggestions dropdown menu using the 'Tab' or 'Escape' keys once it is active. The focus gets permanently trapped inside the results list loop, preventing navigation to the rest of the layout header. Discovered during an internal accessibility audit on Chrome 124. Fix requires refactoring our keydown event listener matrix to allow safe focus transfer back to the main layout body container."
+  },
+  {
+    "uuid": "a46kl3m5-8e92-8a65-e00j-7161620jf3g6",
+    "location": "API - Rate Limiter Middleware",
+    "timeStamp": "14 May 2026 at 10:22",
+    "title": "IP Whitelisting Ignored under Heavy Load Traffic Spikes",
+    "severity": "high",
+    "status": "open",
+    "assignedTo": "DevOps Team",
+    "details": "During high-traffic windows, the Redis rate limiter middleware experiences internal timeout drops. When it falls back, it inadvertently throttles internal corporate service IP addresses instead of bypassing them. This causes automated monitoring background scripts to throw '429 Too Many Requests' exceptions, breaking our metrics tracking charts. Priority: High — distorts real-time cluster telemetry monitoring and performance tracking logs."
+  },
+  {
+    "uuid": "b57lm4n6-9f03-9b76-f11k-8272731kg4h7",
+    "location": "Settings - Password Reset Module",
+    "timeStamp": "14 May 2026 at 11:10",
+    "title": "Reset Token Expiration Window Evaluates Imprecisely",
+    "severity": "low",
+    "status": "open",
+    "assignedTo": "Security Team",
+    "details": "The secure password reset token timeout mechanism expires links exactly 1 hour early for users operating in British Summer Time (BST) or Central European Summer Time (CEST) zones. Root cause: The calculation engine is executing an offset match against local system time variables instead of tracking absolute UTC timestamps directly inside the server database controller. Workaround: Users must request tokens twice or reset using a UTC-aligned machine workspace profiles layout."
+  },
+  {
+    "uuid": "c68mn5p7-0a14-0c87-g22l-9383842lh5i8",
+    "location": "UI Component - Bug Details Drawer",
+    "timeStamp": "14 May 2026 at 13:05",
+    "title": "Horizontal Overflow Clipping on Small Textareas",
+    "severity": "low",
+    "status": "investigating",
+    "assignedTo": "Frontend Team",
+    "details": "When a developer copy-pastes a continuous raw log stack trace string that contains no native whitespace breaks into a bug comment field box, the container layout breaks. The long text overflows the container padding width bounds and clips underneath the page border line. Fix requires applying an explicit `word-break: break-word;` layout property configuration across our card block and comment text wrapper styles inside your index.css file."
   }
 ]
