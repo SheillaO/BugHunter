@@ -2,7 +2,9 @@
 
 *"The bug tracker that doesn't require a PhD to use."*
 
-[![Live Demo](https://img.shields.io/badge/demo-live-success)](https://bugshunter.netlify.app/) (https://bughunter-7v7f.onrender.com/)
+<img width="1496" height="836" alt="Bug Hunt" src="https://github.com/user-attachments/assets/e0a15e93-da6f-470a-9576-6386d2dc24e7" />
+
+[![Live Demo](https://img.shields.io/badge/demo-live-success)](https://bugshunter.netlify.app/)
 
 ---
 
