@@ -3,7 +3,7 @@ const API_BASE =
   window.location.hostname === "localhost" ||
   window.location.hostname === "127.0.0.1"
     ? "http://localhost:8000"
-    : "onrender.com";
+    : "https://bughunter-7v7f.onrender.com";
 
 // 2. Locate targeted DOM form nodes
 const form = document.getElementById("bugForm");
