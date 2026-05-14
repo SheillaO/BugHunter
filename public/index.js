@@ -1,58 +1,81 @@
-// 1. Initialize environment routing base immediately
+// 1. Initialize environment routing base immediately with your specific Render subdomain
 const API_BASE =
   window.location.hostname === "localhost" ||
   window.location.hostname === "127.0.0.1"
     ? "http://localhost:8000"
-    : "onrender.com";
+    : "https://bughunter-7v7f.onrender.com"; // <-- Fixed to your live Render server domain
 
-// 2. Fetch bug listings from your live Render pipeline
-try {
-  const data = await fetch(`${API_BASE}/api`);
-  const response = await data.json();
-  renderCards(response);
-} catch (err) {
-  console.error("Failed to load active bug reports:", err);
-}
+// 2. Locate targeted DOM form nodes
+const form = document.getElementById("bugForm");
+const formMessageText = document.querySelector(".form-message");
 
-function renderCards(cardsData) {
-  const container = document.querySelector(".cards-container");
-  if (!container) return;
+if (form) {
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-  let cardsHTML = "";
+    const title = document.getElementById("title").value.trim();
+    const details = document.getElementById("details").value.trim();
+    const location = document.getElementById("location").value.trim();
+    const severity = document.getElementById("severity").value;
 
-  cardsData.forEach((card, i) => {
-    const severityClass = card.severity
-      ? `severity-${card.severity.toLowerCase()}`
-      : "severity-low";
+    if (!title || !details || !location) {
+      if (formMessageText) {
+        formMessageText.textContent = "Please complete all mandatory fields!";
+      }
+      return;
+    }
 
-    cardsHTML += `
-<article class="bug-card" aria-labelledby="bug-title-${i}">
-  <p class="card-details">
-    <span>${card.timeStamp}</span> | 
-    <span>${card.location}</span> | 
-    <span class="${severityClass}">Priority: ${card.severity || "Low"}</span>
-  </p>
-  <h3 id="bug-title-${i}">${card.title}</h3>
-  <div class="bug-text-wrapper">
-    <!-- CHANGED: Swapped card.text to card.details to line up with backend logic -->
-    <p class="bug-text">${card.details || "No description provided."}</p>
-  </div>
-  <button class="read-more-btn" aria-expanded="false">Read in full</button>
-</article>
-  `;
+    // Generate accurate, live timestamps directly on submission
+    const date = new Date();
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    };
+    const readableDate = date.toLocaleString("en-GB", options);
+
+    // Consolidated payload schema mapping accurately to index.js layout template properties
+    const formData = {
+      title: title,
+      text: details, // Standardized "text" mapping key for database rows
+      location: location,
+      severity: severity,
+      timeStamp: readableDate,
+    };
+
+    try {
+      if (formMessageText) formMessageText.textContent = "Uploading ticket...";
+
+      // 3. Dispatch payload cross-origin straight into Render
+      const response = await fetch(`${API_BASE}/api`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        if (formMessageText) {
+          formMessageText.innerHTML = `Your bug report was logged. View it <a href="bugs.html">here</a>.`;
+        }
+        form.reset();
+      } else {
+        if (formMessageText) {
+          formMessageText.textContent =
+            "The server rejected the log request. Please retry.";
+        }
+        console.error("Server Error:", response.statusText);
+      }
+    } catch (error) {
+      if (formMessageText) {
+        formMessageText.textContent =
+          "Network error. Unable to contact log engine.";
+      }
+      console.error("Log Connection Failure:", error);
+    }
   });
-
-  container.innerHTML = cardsHTML;
 }
-
-// 3. Delegate show more / show less click mechanics safely
-document.querySelector(".cards-container")?.addEventListener("click", (e) => {
-  if (!e.target.classList.contains("read-more-btn")) return;
-
-  const button = e.target;
-  const bugCard = button.closest(".bug-card");
-  const isExpanded = bugCard.classList.toggle("expanded");
-
-  button.setAttribute("aria-expanded", isExpanded ? "true" : "false");
-  button.textContent = isExpanded ? "Show less" : "Read in full";
-});
