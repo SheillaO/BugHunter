@@ -170,7 +170,7 @@ This project demonstrates Node.js fundamentals applied to **real developer tooli
 ## 📞 About
 
 **Sheilla O.**  
-Full-Stack Developer | Nairobi, Kenya 🇰🇪
+Full-Stack Developer |Technical Product Marekting Manager
 
 Building developer tools that don't suck.
 
