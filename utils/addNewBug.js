@@ -1,6 +1,6 @@
 import path from "node:path";
 import fs from "node:fs/promises";
-import crypto from "node:crypto"; // <-- Added this critical native import
+import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { getData } from "./getData.js";
 
@@ -11,7 +11,6 @@ export async function addNewBug(newBug) {
   try {
     const bugs = await getData();
 
-    // Safely assign a unique tracking ID to the incoming bug report
     newBug.uuid = crypto.randomUUID();
     bugs.push(newBug);
 

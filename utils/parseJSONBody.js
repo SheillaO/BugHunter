@@ -1,15 +1,13 @@
 export async function parseJSONBody(req) {
-
-  let body = ''
+  let body = "";
 
   for await (const chunk of req) {
-    body += chunk
+    body += chunk;
   }
 
   try {
-    return JSON.parse(body)
+    return JSON.parse(body);
   } catch (err) {
-    throw new Error(`Invalid JSON format: ${err}`)
+    throw new Error(`Invalid JSON format: ${err}`);
   }
-
 }

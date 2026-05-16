@@ -1,11 +1,10 @@
-// 1. Initialize environment routing base immediately with your full schema prefix
 const API_BASE =
   window.location.hostname === "localhost" ||
   window.location.hostname === "127.0.0.1"
     ? "http://localhost:8000"
     : "https://bughunter-7v7f.onrender.com";
 
-// 2. Fetch bug listings from your live Render data pipeline
+
 async function loadBugs() {
   try {
     const data = await fetch(`${API_BASE}/api`);
@@ -46,10 +45,10 @@ function renderCards(cardsData) {
   container.innerHTML = cardsHTML;
 }
 
-// 3. Run data download function on initialization
+
 loadBugs();
 
-// 4. Delegate show more / show less click mechanics safely
+
 document.querySelector(".cards-container")?.addEventListener("click", (e) => {
   if (!e.target.classList.contains("read-more-btn")) return;
 

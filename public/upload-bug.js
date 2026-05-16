@@ -1,11 +1,9 @@
-// 1. Initialize environment routing base immediately
 const API_BASE =
   window.location.hostname === "localhost" ||
   window.location.hostname === "127.0.0.1"
     ? "http://localhost:8000"
     : "https://bughunter-7v7f.onrender.com";
 
-// 2. Locate targeted DOM form nodes
 const form = document.getElementById("bugForm");
 const formMessageText = document.querySelector(".form-message");
 
@@ -37,10 +35,10 @@ if (form) {
     };
     const readableDate = date.toLocaleString("en-GB", options);
 
-    // Consolidated payload schema mapping accurately to index.js layout template properties
+   
     const formData = {
       title: title,
-      text: details, // <-- Change this property name key here
+      text: details, 
       location: location,
       severity: severity,
       timeStamp: readableDate,
@@ -49,7 +47,7 @@ if (form) {
     try {
       if (formMessageText) formMessageText.textContent = "Uploading ticket...";
 
-      // 3. Dispatch payload cross-origin straight into Render
+     
       const response = await fetch(`${API_BASE}/api`, {
         method: "POST",
         headers: {

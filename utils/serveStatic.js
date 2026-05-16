@@ -21,7 +21,6 @@ export async function serveStatic(req, res, baseDir) {
       const content = await fs.readFile(path.join(publicDir, "404.html"));
       sendResponse(res, 404, "text/html", content);
     } else {
-      // Fixed: Converted single quotes to template literals
       sendResponse(
         res,
         500,

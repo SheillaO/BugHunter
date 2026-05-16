@@ -27,11 +27,9 @@ export async function handlePost(req, res) {
     const parsedBody = await parseJSONBody(req);
     const sanitizedBody = sanitizeInput(parsedBody);
 
-    // Enforce baseline structural values on the incoming tracking object
     sanitizedBody.status = sanitizedBody.status || "open";
     sanitizedBody.assignedTo = sanitizedBody.assignedTo || "Unassigned";
 
-    // Explicitly fallback if either name variance slips through your sanitization filters
     sanitizedBody.text =
       sanitizedBody.text || sanitizedBody.details || "No description provided.";
 

@@ -1,4 +1,3 @@
-// Define a listener function tracking bug submission alerts
 export function createSlackAlert(bug) {
   const severityStr = bug.severity ? bug.severity.toUpperCase() : "LOW";
   const locationStr = bug.location || "Unknown Environment";
